@@ -12,11 +12,17 @@ function formatarDataHora(iso: string): string {
   return new Date(iso).toLocaleString("pt-BR");
 }
 
+function dataDoRegistro(iso: string): string {
+  return iso.slice(0, 10);
+}
+
 export default function HistoricoLotes() {
   const [historico, setHistorico] = useState<HistoricoLote[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erroCarregar, setErroCarregar] = useState(false);
   const [busca, setBusca] = useState("");
+  const [periodoInicial, setPeriodoInicial] = useState("");
+  const [periodoFinal, setPeriodoFinal] = useState("");
 
   useEffect(() => {
     let ativo = true;
@@ -37,15 +43,17 @@ export default function HistoricoLotes() {
   }, []);
 
   const termo = busca.trim().toLowerCase();
-  const historicoFiltrado = termo
-    ? historico.filter(
-        (item) =>
-          String(item.loteId).includes(termo) ||
-          item.codigoLote.toLowerCase().includes(termo) ||
-          item.nomeProduto.toLowerCase().includes(termo) ||
-          item.nomeColaborador.toLowerCase().includes(termo)
-      )
-    : historico;
+  const historicoFiltrado = historico.filter(
+    (item) =>
+      (!periodoInicial ||
+        dataDoRegistro(item.ultimaAtualizacao) >= periodoInicial) &&
+      (!periodoFinal || dataDoRegistro(item.ultimaAtualizacao) <= periodoFinal) &&
+      (!termo ||
+        String(item.loteId).includes(termo) ||
+        item.codigoLote.toLowerCase().includes(termo) ||
+        item.nomeProduto.toLowerCase().includes(termo) ||
+        item.nomeColaborador.toLowerCase().includes(termo))
+  );
 
   return (
     <div className={styles.page}>
@@ -83,6 +91,33 @@ export default function HistoricoLotes() {
             />
           </div>
 
+          <div className={styles.filtros}>
+            <div className={styles.filtroCampo}>
+              <label className={styles.filtroLabel} htmlFor="periodoInicial">
+                Data inicial
+              </label>
+              <input
+                className={styles.filtroData}
+                id="periodoInicial"
+                type="date"
+                value={periodoInicial}
+                onChange={(evento) => setPeriodoInicial(evento.target.value)}
+              />
+            </div>
+            <div className={styles.filtroCampo}>
+              <label className={styles.filtroLabel} htmlFor="periodoFinal">
+                Data final
+              </label>
+              <input
+                className={styles.filtroData}
+                id="periodoFinal"
+                type="date"
+                value={periodoFinal}
+                onChange={(evento) => setPeriodoFinal(evento.target.value)}
+              />
+            </div>
+          </div>
+
           {carregando ? (
             <p className={styles.subtitle}>Carregando histórico...</p>
           ) : erroCarregar ? (
@@ -92,7 +127,7 @@ export default function HistoricoLotes() {
             </p>
           ) : historicoFiltrado.length === 0 ? (
             <p className={styles.subtitle}>
-              {termo
+              {termo || periodoInicial || periodoFinal
                 ? "Nenhum registro encontrado na pesquisa."
                 : "Nenhum registro de histórico ainda."}
             </p>
