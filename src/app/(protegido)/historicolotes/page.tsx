@@ -36,9 +36,15 @@ export default function HistoricoLotes() {
     };
   }, []);
 
-  const termo = busca.trim();
+  const termo = busca.trim().toLowerCase();
   const historicoFiltrado = termo
-    ? historico.filter((item) => String(item.loteId).includes(termo))
+    ? historico.filter(
+        (item) =>
+          String(item.loteId).includes(termo) ||
+          item.codigoLote.toLowerCase().includes(termo) ||
+          item.nomeProduto.toLowerCase().includes(termo) ||
+          item.nomeColaborador.toLowerCase().includes(termo)
+      )
     : historico;
 
   return (
@@ -70,8 +76,8 @@ export default function HistoricoLotes() {
             <input
               className={styles.busca}
               type="search"
-              inputMode="numeric"
-              placeholder="Pesquisar pelo ID do lote"
+              inputMode="search"
+              placeholder="Pesquisar por lote, produto ou colaborador"
               value={busca}
               onChange={(evento) => setBusca(evento.target.value)}
             />
@@ -95,8 +101,22 @@ export default function HistoricoLotes() {
               {historicoFiltrado.map((item) => (
                 <li key={item.id} className={styles.card}>
                   <div className={styles.linhaTopo}>
-                    <span className={styles.rotulo}>Lote ID</span>
-                    <span className={styles.valorDestaque}>{item.loteId}</span>
+                    <span className={styles.rotulo}>Lote</span>
+                    <span className={styles.valorDestaque}>
+                      {item.codigoLote || item.loteId}
+                    </span>
+                  </div>
+                  <div className={styles.infoExtra}>
+                    <div className={styles.campo}>
+                      <span className={styles.rotulo}>Produto</span>
+                      <span className={styles.valorTexto}>{item.nomeProduto}</span>
+                    </div>
+                    <div className={styles.campo}>
+                      <span className={styles.rotulo}>Colaborador</span>
+                      <span className={styles.valorTexto}>
+                        {item.nomeColaborador}
+                      </span>
+                    </div>
                   </div>
                   <div className={styles.detalhes}>
                     <div className={styles.campo}>
