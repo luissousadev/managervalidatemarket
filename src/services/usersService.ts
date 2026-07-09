@@ -22,11 +22,13 @@ type UsuarioAutenticado = Usuario & {
   tipo_usuario_id: number;
 };
 
+// Cadastro neste app: sempre gestor (tipo 2).
 export async function criarUsuario(usuario: NovoUsuario): Promise<number> {
   const { data, error } = await supabase.rpc("criar_usuario", {
     p_nome: usuario.nome,
     p_email: usuario.email,
     p_senha: usuario.senha,
+    p_tipo_usuario_id: TIPO_GESTOR,
   });
 
   if (error) {
