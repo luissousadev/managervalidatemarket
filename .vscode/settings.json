@@ -1,0 +1,22 @@
+{
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "eslint.enable": false,
+  "editor.codeActionsOnSave": {},
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.tsserver.maxTsServerMemory": 2048,
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/out/**": true,
+    "**/.git/**": true,
+    "**/package-lock.json": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/package-lock.json": true,
+    "**/public": true
+  }
+}

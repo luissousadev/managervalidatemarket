@@ -16,6 +16,12 @@ export type NovoUsuario = {
   senha: string;
 };
 
+const TIPO_GESTOR = 2;
+
+type UsuarioAutenticado = Usuario & {
+  tipo_usuario_id: number;
+};
+
 export async function criarUsuario(usuario: NovoUsuario): Promise<number> {
   const { data, error } = await supabase.rpc("criar_usuario", {
     p_nome: usuario.nome,
@@ -32,7 +38,7 @@ export async function criarUsuario(usuario: NovoUsuario): Promise<number> {
   return data as number;
 }
 
-// Retorna o usuário se e-mail e senha estiverem corretos; null caso contrário.
+// Autentica via banco; a regra de perfil gestor é aplicada neste app.
 export async function validarLogin(
   email: string,
   senha: string
@@ -43,8 +49,20 @@ export async function validarLogin(
   });
 
   if (error) throw new Error(`Erro ao validar login: ${error.message}`);
-  const usuarios = (data ?? []) as Usuario[];
-  return usuarios.length > 0 ? usuarios[0] : null;
+
+  const usuarios = (data ?? []) as UsuarioAutenticado[];
+  if (usuarios.length === 0) return null;
+
+  const usuario = usuarios[0];
+  if (Number(usuario.tipo_usuario_id) !== TIPO_GESTOR) {
+    throw new Error("Acesso permitido apenas para usuários gestores.");
+  }
+
+  return {
+    id: Number(usuario.id),
+    nome: usuario.nome,
+    email: usuario.email,
+  };
 }
 
 // --- Sessão do usuário logado (localStorage) ---

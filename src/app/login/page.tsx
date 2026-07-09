@@ -33,7 +33,11 @@ export default function Login() {
       router.push("/home");
     } catch (erro) {
       console.error(erro);
-      alert("Erro ao entrar. Verifique sua conexão e tente novamente.");
+      alert(
+        erro instanceof Error
+          ? erro.message
+          : "Erro ao entrar. Verifique sua conexão e tente novamente."
+      );
       setEntrando(false);
     }
   }

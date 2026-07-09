@@ -1,0 +1,29 @@
+---
+description: Performance máxima — execuções precisas, rápidas e mínimas
+alwaysApply: true
+---
+
+# Performance e execução mínima
+
+Objetivo: entregar o pedido com o menor número de passos possível.
+
+## Proibido sem pedido explícito
+
+- `npm run build`, `npm run lint`, `tsc`, `eslint`, `read_lints`
+- `npm install` (salvo se dependência nova foi adicionada)
+- deploy, push, PR, consultas ao banco ou APIs externas
+- subagents (`Task`), browser MCP, exploração ampla do repo
+- criar arquivos temporários, scripts auxiliares ou documentação extra
+- listas de TODO para tarefas simples
+
+## Como agir
+
+1. Leia só os arquivos necessários — preferir 1–2 arquivos a buscas em massa.
+2. Edite direto; não reexplore o que já está claro.
+3. Resposta curta: o que mudou e onde.
+4. Paralelize tool calls apenas quando forem independentes e realmente necessárias.
+5. Dúvida pequena → assuma o padrão do projeto; não pergunte demais.
+
+## Validação
+
+Só validar quando o usuário pedir "build", "lint", "testar" ou "verificar".

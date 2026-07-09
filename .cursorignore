@@ -1,0 +1,9 @@
+﻿node_modules/
+.next/
+out/
+build/
+.vercel/
+coverage/
+*.tsbuildinfo
+package-lock.json
+public/
