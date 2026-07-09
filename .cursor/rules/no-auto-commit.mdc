@@ -1,0 +1,10 @@
+---
+description: Nunca commitar nem dar push — o usuário revisa e publica manualmente
+alwaysApply: true
+---
+
+# Git: sem commit automático
+
+- **Nunca** rode `git commit`, `git push`, `git add` para staging de entrega, nem crie PR, salvo pedido explícito do usuário.
+- Após alterações de código, informe o que mudou e pare; o usuário revisa, commita e faz push.
+- Pode usar `git status` ou `git diff` se ajudar a resumir o que foi alterado, sem preparar commit.

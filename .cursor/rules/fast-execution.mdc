@@ -1,29 +1,27 @@
 ---
-description: Performance máxima — execuções precisas, rápidas e mínimas
+description: Performance — só o essencial do pedido, sem verificações extras
 alwaysApply: true
 ---
 
-# Performance e execução mínima
+# Foco: performance e essencial
 
-Objetivo: entregar o pedido com o menor número de passos possível.
+Entregue **apenas** o que o usuário pediu, da forma mais rápida e direta.
 
-## Proibido sem pedido explícito
+## Não fazer (salvo pedido explícito)
 
-- `npm run build`, `npm run lint`, `tsc`, `eslint`, `read_lints`
-- `npm install` (salvo se dependência nova foi adicionada)
-- deploy, push, PR, consultas ao banco ou APIs externas
-- subagents (`Task`), browser MCP, exploração ampla do repo
-- criar arquivos temporários, scripts auxiliares ou documentação extra
-- listas de TODO para tarefas simples
+- build, lint, tsc, eslint, `read_lints`, testes
+- `npm install`, deploy, commit, push, PR
+- consultas ao banco, browser, subagents, exploração ampla do repo
+- scripts temporários, docs extras, TODOs em tarefas simples
+- múltiplas rodadas de verificação “por garantia”
 
-## Como agir
+## Fazer
 
-1. Leia só os arquivos necessários — preferir 1–2 arquivos a buscas em massa.
-2. Edite direto; não reexplore o que já está claro.
-3. Resposta curta: o que mudou e onde.
-4. Paralelize tool calls apenas quando forem independentes e realmente necessárias.
-5. Dúvida pequena → assuma o padrão do projeto; não pergunte demais.
+1. Ler/editar só os arquivos necessários (1–3 no máximo quando possível).
+2. Mudança mínima que resolve o pedido.
+3. Resposta curta: o que mudou e em quais arquivos.
+4. Parar ao terminar — o usuário revisa, commita e publica.
 
 ## Validação
 
-Só validar quando o usuário pedir "build", "lint", "testar" ou "verificar".
+Só rodar build/lint/teste se o usuário pedir explicitamente.
