@@ -54,7 +54,7 @@ export default function Login() {
             className={styles.logo}
             priority
           />
-          <h1 className={styles.title}>Bem-vindo!</h1>
+          <h1 className={styles.title}>Bem-vindo Gestor!</h1>
           <p className={styles.subtitle}>
             Entre com suas credenciais para continuar
           </p>
