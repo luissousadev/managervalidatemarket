@@ -41,6 +41,16 @@ const itens = [
     ),
   },
   {
+    href: "/historicolotes",
+    rotulo: "Historico Lotes",
+    icone: (
+      <>
+        <path d="M3 3v18h18" />
+        <path d="M7 16l4-6 4 3 5-7" />
+      </>
+    ),
+  },
+  {
     href: "/colaboradores",
     rotulo: "Colaboradores",
     icone: (
