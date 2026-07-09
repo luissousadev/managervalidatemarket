@@ -96,6 +96,10 @@
 }
 
 .card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   padding: 14px 16px;
   border: 1px solid rgba(94, 140, 255, 0.25);
   border-radius: 16px;
@@ -107,6 +111,7 @@
 
 .info {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 4px;
   min-width: 0;
@@ -126,4 +131,116 @@
 .cadastro {
   font-size: 11px;
   color: #5d749f;
+}
+
+.acaoEditar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(94, 140, 255, 0.25);
+  background: rgba(13, 30, 60, 0.8);
+  color: #4f8bff;
+  cursor: pointer;
+}
+
+.acaoEditar svg {
+  width: 15px;
+  height: 15px;
+}
+
+.modalOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(5, 13, 28, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 300px;
+  padding: 22px 20px;
+  border: 1px solid rgba(94, 140, 255, 0.4);
+  border-radius: 20px;
+  background: rgba(13, 30, 60, 0.95);
+  box-shadow: 0 0 40px rgba(47, 107, 255, 0.35);
+}
+
+.modalTitulo {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modalUsuario {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.modalEmail {
+  margin: 4px 0 16px;
+  font-size: 12px;
+  color: #8da4c9;
+  word-break: break-all;
+}
+
+.modalLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #8da4c9;
+}
+
+.modalSelect {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(94, 140, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(8, 18, 38, 0.95);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.modalAcoes {
+  display: flex;
+  gap: 10px;
+}
+
+.botaoCancelar,
+.botaoSalvar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botaoCancelar {
+  border: 1px solid rgba(94, 140, 255, 0.25);
+  background: transparent;
+  color: #8da4c9;
+}
+
+.botaoSalvar {
+  border: none;
+  background: linear-gradient(180deg, #4f8bff 0%, #2f6bff 100%);
+  color: #fff;
+}
+
+.botaoCancelar:disabled,
+.botaoSalvar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
