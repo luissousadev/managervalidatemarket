@@ -2,6 +2,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
+import CabecalhoGestor from "@/components/CabecalhoGestor";
 import { CHAVE_SESSAO } from "@/services/usersService";
 
 // Guarda de autenticação: toda tela dentro de (protegido) só renderiza com
@@ -43,5 +44,10 @@ export default function LayoutProtegido({
 
   if (!logado) return null;
 
-  return children;
+  return (
+    <>
+      <CabecalhoGestor />
+      {children}
+    </>
+  );
 }

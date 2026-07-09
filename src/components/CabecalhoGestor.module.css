@@ -1,0 +1,22 @@
+.cabecalho {
+  width: 100%;
+  padding: 12px 20px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(47, 107, 255, 0.2), transparent 70%),
+    linear-gradient(180deg, #0a1830 0%, #081226 100%);
+  border-bottom: 1px solid rgba(94, 140, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.titulo {
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #aebfdd;
+}
+
+.nome {
+  color: #fff;
+}
