@@ -9,28 +9,29 @@ function assinarSessao(notificar: () => void) {
   return () => window.removeEventListener("storage", notificar);
 }
 
-function lerUsuario(): Usuario | null {
-  const valor = localStorage.getItem(CHAVE_SESSAO);
-  if (!valor) return null;
-  try {
-    return JSON.parse(valor) as Usuario;
-  } catch {
-    return null;
-  }
+function lerSessao() {
+  return localStorage.getItem(CHAVE_SESSAO);
 }
 
-function lerUsuarioNoServidor() {
+function lerSessaoNoServidor() {
   return null;
 }
 
 export default function CabecalhoGestor() {
-  const usuario = useSyncExternalStore(
+  const sessao = useSyncExternalStore(
     assinarSessao,
-    lerUsuario,
-    lerUsuarioNoServidor
+    lerSessao,
+    lerSessaoNoServidor
   );
 
-  if (!usuario) return null;
+  if (!sessao) return null;
+
+  let usuario: Usuario;
+  try {
+    usuario = JSON.parse(sessao) as Usuario;
+  } catch {
+    return null;
+  }
 
   return (
     <header className={styles.cabecalho}>
