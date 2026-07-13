@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import MenuSuperior from "@/components/MenuSuperior";
 import {
+  type Colaborador,
+  listarColaboradores,
+} from "@/services/colaboradoresService";
+import {
   type HistoricoLote,
   listarHistoricoLotes,
 } from "@/services/historicoLotesService";
@@ -23,6 +27,8 @@ export default function HistoricoLotes() {
   const [busca, setBusca] = useState("");
   const [periodoInicial, setPeriodoInicial] = useState("");
   const [periodoFinal, setPeriodoFinal] = useState("");
+  const [colaboradorId, setColaboradorId] = useState("");
+  const [colaboradores, setColaboradores] = useState<Colaborador[]>([]);
 
   useEffect(() => {
     let ativo = true;
@@ -37,6 +43,13 @@ export default function HistoricoLotes() {
       .finally(() => {
         if (ativo) setCarregando(false);
       });
+
+    listarColaboradores()
+      .then((lista) => {
+        if (ativo) setColaboradores(lista);
+      })
+      .catch((erro) => console.error(erro));
+
     return () => {
       ativo = false;
     };
@@ -48,6 +61,7 @@ export default function HistoricoLotes() {
       (!periodoInicial ||
         dataDoRegistro(item.ultimaAtualizacao) >= periodoInicial) &&
       (!periodoFinal || dataDoRegistro(item.ultimaAtualizacao) <= periodoFinal) &&
+      (!colaboradorId || String(item.usuarioId) === colaboradorId) &&
       (!termo ||
         String(item.loteId).includes(termo) ||
         item.codigoLote.toLowerCase().includes(termo) ||
@@ -118,6 +132,25 @@ export default function HistoricoLotes() {
             </div>
           </div>
 
+          <div className={styles.filtroColaborador}>
+            <label className={styles.filtroLabel} htmlFor="colaborador">
+              Colaborador
+            </label>
+            <select
+              className={styles.filtroSelect}
+              id="colaborador"
+              value={colaboradorId}
+              onChange={(evento) => setColaboradorId(evento.target.value)}
+            >
+              <option value="">Todos os colaboradores</option>
+              {colaboradores.map((colaborador) => (
+                <option key={colaborador.id} value={String(colaborador.id)}>
+                  {colaborador.nome}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {carregando ? (
             <p className={styles.subtitle}>Carregando histórico...</p>
           ) : erroCarregar ? (
@@ -127,7 +160,7 @@ export default function HistoricoLotes() {
             </p>
           ) : historicoFiltrado.length === 0 ? (
             <p className={styles.subtitle}>
-              {termo || periodoInicial || periodoFinal
+              {termo || periodoInicial || periodoFinal || colaboradorId
                 ? "Nenhum registro encontrado na pesquisa."
                 : "Nenhum registro de histórico ainda."}
             </p>

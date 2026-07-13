@@ -128,6 +128,38 @@
     0 0 16px rgba(47, 107, 255, 0.35);
 }
 
+.filtroColaborador {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.filtroSelect {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(94, 140, 255, 0.25);
+  border-radius: 12px;
+  background: rgba(13, 30, 60, 0.8);
+  box-shadow:
+    inset 0 1px 6px rgba(0, 0, 0, 0.4),
+    0 0 12px rgba(47, 107, 255, 0.12);
+  color: #fff;
+  font-size: 12px;
+  outline: none;
+}
+
+.filtroSelect:focus {
+  border-color: rgba(94, 140, 255, 0.7);
+  box-shadow:
+    inset 0 1px 6px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(47, 107, 255, 0.35);
+}
+
+.filtroSelect option {
+  color: #000;
+}
+
 .lista {
   display: flex;
   flex-direction: column;

@@ -7,6 +7,7 @@ export type HistoricoLote = {
   loteId: number;
   codigoLote: string;
   nomeProduto: string;
+  usuarioId: number | null;
   nomeColaborador: string;
   ultimaAtualizacao: string;
   estoqueAnterior: number;
@@ -58,6 +59,7 @@ function paraHistorico(
     loteId: linha.lote_id,
     codigoLote: linha.lotes?.codigo ?? "",
     nomeProduto: linha.lotes?.produtos?.descricao ?? "—",
+    usuarioId: usuarioId ?? null,
     nomeColaborador,
     ultimaAtualizacao: linha.ultima_atualizacao,
     estoqueAnterior: linha.estoque_anterior,
