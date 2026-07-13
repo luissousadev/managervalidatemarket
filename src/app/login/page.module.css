@@ -111,6 +111,30 @@
   color: #5d749f;
 }
 
+.olho {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #6f87b4;
+  cursor: pointer;
+}
+
+.olho svg {
+  width: 16px;
+  height: 16px;
+}
+
+.olho:hover {
+  color: #aebfdd;
+}
+
 .forgot {
   align-self: flex-start;
   margin: 2px 0 26px;
